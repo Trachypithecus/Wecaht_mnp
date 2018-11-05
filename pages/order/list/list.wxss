@@ -1,0 +1,67 @@
+/* pages/order/list/list.wxss */
+.active-color{
+  background: #FF9C35;
+}
+.unactive-color{
+  background: #999999;
+}
+.start-btn{
+  width:100px;
+  height:30px;
+  background:#FF9C35;
+  font-size:14px;
+  color:white;
+}
+.note-btn{
+  font-size:14px;
+  color:grey;
+  margin-top:30px
+}
+.dindgan-i{
+  font-size:100px;
+  color:grey;
+}
+.tab-box{
+  width:50%;
+  display:flex;
+  font-size:14px;
+  color:white
+}
+.order-info{
+  background: white;
+  margin-top:10px;
+}
+.order-info-title{
+  font-size:12px;
+  color: #D1D1D1;
+  padding: 12px;
+  border-bottom: 1px #E3E3E3 solid
+}
+.order-cut{
+  height:30px;
+  padding:5px 15px;
+  border-bottom: 1px #E3E3E3 solid;
+}
+.order-cut-dec{
+  background:#F07474;
+  font-size:13px;
+  color:white;
+  padding:2px
+}
+.order-cut-note{
+  margin-left:3px;
+  font-size:14px
+}
+.order-cut-number{
+  font-size:14px;
+  float:right;
+}
+.order-sum{
+  height:30px;
+  padding:5px 15px;
+  font-size:14px;
+}
+.order-sum-number{
+  font-size:14px;
+  float:right;
+}

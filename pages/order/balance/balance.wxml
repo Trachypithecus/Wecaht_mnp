@@ -1,0 +1,55 @@
+<!--pages/order/balance/balance.wxml-->
+<view>
+    <view class='top-bar'>
+      <label class='top-left-label'>上餐时间</label>
+      <label class='top-right-label activity-color'>制作中，尽快为你服务</label>
+    </view>
+  <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+
+    
+    <!-- 订单详情 -->
+    <view class='order-info'>
+      <view class='order-info-title'>订单详情</view>
+      <view class='cart-list-box' wx:for="{{Shoplist}}" wx:key="unique">
+        <view class='list-info'>
+          <view>{{item.fields.MenuName}}</view>
+        </view>
+        <view style='width:50%;padding:10px;'>
+          <view style='float:right'>
+            <view style='color:#A3A3A3'>x {{item.fields.Num}}</view>
+            <view>¥ {{item.fields.Price*item.fields.Num}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='order-sum'>
+        <label>总计 </label>
+        <label class='order-sum-number activity-color'>¥ {{sumMonney}}</label>
+      </view>
+    </view>
+      <view class='note'>  
+      <label style='font-size:20px;color:#000000;'>备注</label>
+      <textarea style='height:150rpx' class='note-text' id='beizhu' value='无' show-confirm-bar='' bindblur='bindTextAreaBlur' ></textarea>    
+    </view>
+
+      <image src="../../images/blank.png" style='width:100%;height:150rpx'></image>
+  </scroll-view>
+  <!-- <view>
+    <label style="height:2000rpx">.</label>
+  </view> -->
+
+<!-- 底部操作栏 -->
+  <view class="operate-bar">
+    <view class='gouwuche'>
+      <view style='padding:5px;display:flex'>
+        <i class="iconfont icon-gouwuchefill gouwuche-icon activity-color">
+          <span class="number-msg" wx:if="{{cartList.length!=0}}">{{Number}}</span>
+        </i>
+        <view class='gouwuche-price' style='color:white;font-size:18px'>¥ {{sumMonney}}</view>
+      </view>
+    </view>
+    <view class="submit-btn activity-color-bg" bindtap='gopay' wx:if="{{Shoplist!=0}}" >
+      <view class="submit-btn-label color-white">确认订单</view>
+    </view>
+  </view>
+
+</view>

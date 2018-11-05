@@ -1,0 +1,103 @@
+<view>
+  <!-- 左侧菜单 -->
+  <view class="list-left-menu">
+    <view wx:for="{{goodsType}}" wx:key="unique" class="{{index==activeIndex?'list-left-menu-box-selected':'list-left-menu-box-unselect'}}" data-index="{{index}}" bindtap='selectMenu'>
+      <view class="list-menu-name">{{item.pk}}</view>
+    </view>
+  </view>
+  <!-- 右侧菜单 -->
+  <scroll-view scroll-y="true" style='height:1200rpx;' bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+
+    <view class="content" id="a{{index}}" wx:for="{{goodsType}}" wx:key="unique" wx:for-item="i">
+      <!-- 类别 -->
+      <view class='list-tab'>{{i.pk}}</view>
+      <!-- 菜品 for循环遍历js传过来的菜品数据listData[]，items给listData中子元素添加一个可调用的key名，indexs是记录当前元素在数组中的下标 key值唯一。-->
+      <view class='content-list' wx:for="{{listData}}" wx:key="unique" wx:for-item="items" wx:for-index="indexs" wx:if="{{items.fields.Type==i.pk}}">
+          <!-- 菜品图片 -->
+          <view class='list-image-box'>
+            <!-- mode="widthFix"：宽度不变，高度自动变化 -->
+            <image class="list-image" mode="widthFix" src='https://www.qqmxd.com/static/{{items.fields.Img}}'></image>
+          </view>
+          <!-- 菜品名字 -->
+          <view class='issue-name'>
+            <view>{{items.pk}}</view>
+            <!-- 价格 点击添加后执行selectInfo函数，记录数组下标index和当前菜品类型type -->
+            <view style='margin-top:20rpx;color:#F05A86'>
+              ¥ {{items.fields.Price}}
+              <i class="iconfont icon-jiahao2fill plus-icon" data-type="{{index}}" data-index="{{indexs}}" data-pk="{{items.pk}}" data-price="{{items.fields.Price}}" data-img="https://www.qqmxd.com/static/{{items.fields.Img}}" bindtap="selectInfo"></i>
+            </view>        
+          </view>
+      </view>
+      <view style='width: 300rpx height: 10rpx'></view>
+      
+    </view>
+    <view><image src="" style='height:100rpx'></image></view>
+  </scroll-view>
+  <!-- 底部操作菜单 -->
+  <view class="operate-bar" wx:if="{{loading}}">
+    <view class='gouwuche'>
+      <view style='padding:5px;display:flex'>
+        <i class="iconfont icon-gouwuchefill gouwuche-icon {{sumMonney!=0?'activity-color':'' }}" bindtap="showCartList">
+          <span class="number-msg" wx:if="{{Number.length!=0}}">{{Number}}</span>
+        </i>
+
+        <view class='gouwuche-price' wx:if="{{sumMonney==0}}">购物车是空的</view>
+        <!-- 计算购物车总价 -->
+        <!-- <view wx:for="{{Shoplist}}" class='gouwuche-price' style='color:white;font-size:18px' wx:if="{{sumMonney!=0}}" data-item="{{item.fields.MenuName}}">¥ {{item.fields.Price*item.fields.Num}}</view> -->
+        <view  class='gouwuche-price' style='color:white;font-size:18px'>¥ 
+        {{sumMonney}}</view>
+      </view>
+    </view>
+    <view class="submit-btn {{sumMonney!=0?'activity-color-bg':'' }}" bindtap='goBalance'>
+      <view class="submit-btn-label {{sumMonney!=0?'color-white':'' }}">选好了</view>
+    </view>
+  </view>
+</view>
+<!-- 自定义弹窗showModalStatus -->
+<view class="drawer_screen" bindtap="selectInfo" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_box_ad" wx:if="{{showModalStatus}}">
+  <view class="drawer_content_ad">
+    <view style='font-size:16px;display:flex;justify-content:center;'> {{listData[currentIndex].pk}} </view>
+    <!-- 菜品图片 -->
+    <view style='display:flex; width:100%; height:60%;'>
+      <image src='https://www.qqmxd.com/static/{{listData[currentIndex].fields.Img}}'></image>
+    </view> 
+    <view class='select-Introduction'>{{listData[currentIndex].fields.Introduction}}</view>
+    <view class="select-price">¥{{listData[currentIndex].fields.Price}} 
+      <button class="btn-putIn" bindtap='addToCart'>加入购物车</button>     
+    </view>     
+  </view>
+</view>
+<!-- 购物车 -->
+<view class="drawer_screen" bindtap="showCartList" data-statu="close" wx:if="{{showCart}}"></view>
+<view class="cartlist-float" wx:if="{{showCart}}">
+  <view style='background:#F0F0F0;height:50rpx'>
+    <label class='label-cart-bar'>
+      <label style='padding:5px'>已选商品</label>
+    </label>
+    <label class='icon-clear' bindtap='clearCartList'>
+      <i class="iconfont icon-lajitong"></i>
+      <label class="label-clear">清空购物车</label>
+    </label>
+  </view>
+  <scroll-view scroll-y="true" class="{{Shoplist.length>=5?'cart-scroll-list':''}}">
+
+    <view class='cart-list-box' wx:for="{{Shoplist}}" wx:key="unique" style='border-bottom:1px #E3E3E3 solid'>
+      <view class='list-info'>
+        <view>{{item.fields.MenuName}}</view>
+        <!-- <view class='list-info-size'>{{item.detail}}</view> -->
+      </view>
+      <view style='width:50%;padding:10px;'>
+        <view style='float:right'>
+          <!-- 计算单个商品总价 -->
+          <label class='activity-color'>¥ {{item.fields.Price*item.fields.Num}}</label>
+          <!-- <label class='activity-color'>X{{item.fields.Num}}</label> -->
+          <i class="iconfont icon-jian icon-li-circle" data-index="{{item.fields.MenuName}}" bindtap="decNumber"></i>
+          <label>　{{item.fields.Num}}　</label>
+          <i class="iconfont icon-jiahao2fill activity-color font20" data-index="{{item.fields.MenuName}}" bindtap="addNumber"></i>
+        </view>
+      </view>
+    </view>
+    <image src="../../images/blank.png" style='width:100%;height:80rpx'></image>
+  </scroll-view>
+</view>
