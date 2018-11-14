@@ -4,8 +4,8 @@
     <view class="card-box">
       <view class="card-fetch">
         <view class="card-left-bar">
-          <label>取</label>
-          <label>餐</label>
+          <label>订</label>
+          <label>单</label>
           <label>号</label>
         </view>
       </view>
@@ -15,11 +15,13 @@
           <!-- <label class='statu-card'>制作中</label> -->
         </view>
         <view class='note-card'>
-          制作中,尽快为你服务
+          后厨已接单，准备制作中
         </view>
       </view>
     </view>
   </view>
+    <button class='wbutton' style='background-color: #FF9C35' type="primary" size="mini" loading="{{loading}}" plain="{{plain}}"
+		disabled="{{disabled}}" bindtap="weiPay"> 立即支付 </button>
   <!-- 订单详情 -->
   <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 

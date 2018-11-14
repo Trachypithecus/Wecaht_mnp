@@ -18,9 +18,8 @@
   </view>
 </view>
 <view class="go-center" style='margin-top:80px;font-size:14px;color:blue;' bindtap='bitphone'>
-    <label style='border-bottom:1px solid blue'>订餐电话：181-8579-5650</label>
+    <label style='border-bottom:1px solid blue'>外卖订餐：181-8579-5650</label>
 </view>
 <view class='go-center' style='margin-top:10px'>
-
-  <label style='font-size:12px;color:#E2E2E2'>[服务时间 周一至周日 9:00-19:00]</label>
+  <label style='font-size:12px;color:#E2E2E2'>欢迎光临小食记餐饮店！</label>
 </view>

@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.5.2",
+	"libVersion": "2.4.0",
 	"appid": "wx789c583bc751f9af",
 	"projectname": "%E6%B5%8B%E8%AF%95",
 	"condition": {
@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -61,7 +61,7 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "桌号",
 					"pathName": "pages/index/index",
 					"query": "Desk=1"
@@ -69,7 +69,7 @@
 				{
 					"id": 6,
 					"name": "桌号",
-					"pathName": "pages/index/index",
+					"pathName": "pages/order/detail/detail",
 					"query": "Desk=100"
 				},
 				{

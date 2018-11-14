@@ -66,6 +66,10 @@ page{
   background:#FF9C35;
 }
 
+.activity-color-gr{
+  background:rgb(6, 241, 18);
+}
+
 .cart-list-box{
   background:#FFFFFF;
   display:flex;

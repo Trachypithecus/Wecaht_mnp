@@ -50,6 +50,9 @@ Page({
     wx.setStorageSync("beizhu", e.detail.value), 
     console.log(wx.getStorageSync("beizhu"))
   },
+  /**
+   * 前台支付
+   */
   gopay: function () {
     var OrderId = util.formatTime(new Date())
     app.globalData.OrderId = OrderId

@@ -1,8 +1,8 @@
 <!--pages/order/balance/balance.wxml-->
 <view>
     <view class='top-bar'>
-      <label class='top-left-label'>上餐时间</label>
-      <label class='top-right-label activity-color'>制作中，尽快为你服务</label>
+      <label class='top-left-label'>下单时间</label>
+      <label class='top-right-label activity-color'></label>
     </view>
   <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
