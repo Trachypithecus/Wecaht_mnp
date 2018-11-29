@@ -91,10 +91,16 @@ page{
 }
 .wbutton{
   margin-top: 40rpx;
-  margin-left: 100rpx;
-  width: 75%; 
-  height: 100%; 
-  display: flex; 
+  margin-left: 80rpx;
+  text-align: center;
+  width: 80%; 
+  height: 120%; 
+  display: flex;
   align-items: center;
   background: #FF9C35;
+}
+.wwbutton{
+  margin-top: 40rpx;
+  width: 85%;
+  height: 90%;
 }

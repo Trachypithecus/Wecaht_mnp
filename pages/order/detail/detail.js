@@ -45,6 +45,16 @@ Page({
               paySign: res.data.paySign,
               success: function (res) {
                 console.log('支付成功：', res)
+                wx.request({
+                  url: 'https://www.qqmxd.com/login/pays', //仅为示例，并非真实的接口地址
+                  data: {
+                    orderid: OrderId,
+                  },
+                  method: 'GET',
+                  success(res) {
+                    console.log("PaySucc")
+                  }
+                })
               },
               fail: function (res) {
                 console.log('支付失败：', res)

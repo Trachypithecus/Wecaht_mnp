@@ -20,8 +20,10 @@
       </view>
     </view>
   </view>
-    <button class='wbutton' style='background-color: #FF9C35' type="primary" size="mini" loading="{{loading}}" plain="{{plain}}"
-		disabled="{{disabled}}" bindtap="weiPay"> 立即支付 </button>
+    <!-- <button class='wbutton' style='background-color: #green' type="primary" size="mini" loading="{{loading}}" plain="{{plain}}"
+		disabled="{{disabled}}" bindtap="weiPay"> 立即支付 </button> -->
+<button class="wwbutton" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" bindtap="weiPay" > 立即支付 </button>  
   <!-- 订单详情 -->
   <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 

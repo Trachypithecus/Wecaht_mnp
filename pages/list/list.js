@@ -37,13 +37,13 @@ Page({
               app.globalData.NIckName = res.userInfo.nickName
               //登录
               wx.request({
-                url: 'https://www.qqmxd.com/login', //仅为示例，并非真实的接口地址
+                url: 'https://www.qqmxd.com/login', 
                 data: {
                   code: app.globalData.Code,
                   nickName: app.globalData.NIckName
                 },
                 header: {
-                  'content-type': 'application/json' // 默认值
+                  'content-type': 'application/json' 
                 },
                 success: res => {
                   if (res.data!="None"){
@@ -118,57 +118,7 @@ Page({
     })
     console.log(this.data.toView);  //打印输出
   },
-  //屏幕滚动
-  // scroll: function (e) {
-  //   console.log(e)
-  //   var dis = e.detail.scrollTop
-  //   if (dis > 0 && dis < 1189) {
-  //     this.setData({
-  //       activeIndex: 0,
-  //     })
-  //   }
-  //   //设置数据范围
-  //   if (dis > 1189 && dis < 1867) {
-  //     this.setData({
-  //       activeIndex: 1,
-  //     })
-  //   }
-  //   if (dis > 1867 && dis < 2180) {
-  //     this.setData({
-  //       activeIndex: 2,
-  //     })
-  //   }
-  //   if (dis > 2180 && dis < 2785) {
-  //     this.setData({
-  //       activeIndex: 3,
-  //     })
-  //   }
-  //   if (dis > 2785 && dis < 2879) {
-  //     this.setData({
-  //       activeIndex: 4,
-  //     })
-  //   }
-  //   if (dis > 2879 && dis < 4287) {
-  //     this.setData({
-  //       activeIndex: 5,
-  //     })
-  //   }
-  //   if (dis > 4287 && dis < 4454) {
-  //     this.setData({
-  //       activeIndex: 6,
-  //     })
-  //   }
-  //   if (dis > 4454 && dis < 4986) {
-  //     this.setData({
-  //       activeIndex: 7,
-  //     })
-  //   }
-  //   if (dis > 4986) {
-  //     this.setData({
-  //       activeIndex: 8,
-  //     })
-  //   }
-  // },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    * 选择添加按钮事件
@@ -292,7 +242,7 @@ Page({
   decNumber: function (e) {
     var index = e.currentTarget.dataset.index;
     console.log(index)
-
+    
     //更新数据到OrderCache
     wx.request({
       url: 'https://www.qqmxd.com/mydata/delMenu',
@@ -394,27 +344,63 @@ Page({
    */
   GetCache: function (e) {
       //获取OrderCache
-      wx.request({
-        url: 'https://www.qqmxd.com/mydata/OrderCache',
-        method: 'POST',
-        data: {
-          Desk: app.globalData.Desk,
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: res => {
-          console.log('OrderCache+sum:' + res)
-          var sum=0.00
-          for (var i in res.data) {
-            sum = parseFloat(sum) + parseFloat(res.data[i].fields.Price * res.data[i].fields.Num)
-          }
-          this.setData({
-            Shoplist: res.data,
-            sumMonney: sum,
-            Number: res.data.length
-          });
-        }
+    //   wx.request({
+    //     url: 'https://www.qqmxd.com/mydata/OrderCache',
+    //     method: 'POST',
+    //     data: {
+    //       Desk: app.globalData.Desk,
+    //     },
+    //     header: {
+    //       'Content-Type': 'application/x-www-form-urlencoded'
+    //     },
+    //     success: res => {
+    //       console.log('OrderCache+sum:' + res)
+    //       var sum=0.00
+    //       for (var i in res.data) {
+    //         sum = parseFloat(sum) + parseFloat(res.data[i].fields.Price * res.data[i].fields.Num)
+    //       }
+    //       this.setData({
+    //         Shoplist: res.data,
+    //         sumMonney: sum,
+    //         Number: res.data.length
+    //       });
+    //     }
+    // })
+     //websocket连接
+    wx.connectSocket({
+      url: 'wss://www.qqmxd.com/ws/wesocket/1/',
     })
+    wx.onSocketOpen(function (res) {
+      console.log('WebSocket连接已打开！')
+    })
+    wx.onSocketMessage(function (res) {
+      console.log('收到服务器内容：' + res.data)
+    })
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
     }
 })
